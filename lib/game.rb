@@ -1,4 +1,4 @@
-require 'yaml'
+require 'json'
 # Define game class
 class Game
   attr_accessor :secret_word, :guess_word, :wrong_guesses, :number_of_guess
@@ -56,9 +56,15 @@ def save_game(game)
   dirname = 'saved'
 
   # Serialized game into the file 
-  serialized_game = YAML::dump(game)
-
+ 
+  serialized_game = JSON.dump({
+    :secret_word => game.secret_word,
+    :guess_word => game.guess_word,
+    :wrong_guesses => game.wrong_guesses,
+    :number_of_guess => game.number_of_guess
+    })
+ 
   # Create a new file in the saved directory and write the serilized game into it
   Dir.mkdir(dirname) unless File.exist? dirname
-  File.open("#{dirname}/#{filename}.yaml", 'w') { |f| f.write(serialized_game) }
+  File.open("#{dirname}/#{filename}.json", 'w') { |f| f.write(serialized_game) }
 end
