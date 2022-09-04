@@ -21,7 +21,8 @@ class Game
 
       if @guess_char == 'exit'
         puts "save the current game"
-        p YAML::dump(self)
+        # p YAML::dump(self)
+        save_game(self)
         @game_over = true
 
       elsif @guess_word.eql?(@secret_word.chomp)
@@ -46,5 +47,18 @@ class Game
       end
     end
   end
-  
+end
+
+def save_game(game)
+  # Enter the name for the saved game
+  puts 'Enter a name for your game'
+  filename = gets.chomp
+  dirname = 'saved'
+
+  # Serialized game into the file 
+  serialized_game = YAML::dump(game)
+
+  # Create a new file in the saved directory and write the serilized game into it
+  Dir.mkdir(dirname) unless File.exist? dirname
+  File.open("#{dirname}/#{filename}.yaml", 'w') { |f| f.write(serialized_game) }
 end

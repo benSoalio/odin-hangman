@@ -1,0 +1,11 @@
+--- !ruby/object:Game
+secret_word: allah
+guess_word: a__a_
+wrong_guesses:
+- u
+- k
+- e
+- o
+number_of_guess: 6
+game_over: false
+guess_char: exit

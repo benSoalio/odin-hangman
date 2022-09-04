@@ -25,5 +25,4 @@ until choice == 1 || choice == 2
   choice = gets.chomp.to_i
 end
 
-
 Game.new(secret_word, guess_word, wrong_guesses, number_of_guess)
